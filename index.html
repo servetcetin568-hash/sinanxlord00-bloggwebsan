@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sinanxlord Fitness Blog</title>
+
+<style>
+
+:root{
+--bg:#111;
+--card:#1e1e1e;
+--accent:#ff9800;
+--text:#fff;
+}
+
+body{
+margin:0;
+font-family:Arial;
+background:var(--bg);
+color:var(--text);
+}
+
+.light{
+--bg:#f4f4f4;
+--card:#fff;
+--text:#111;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+padding:12px 20px;
+background:#000;
+}
+
+.hero{
+height:230px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#222;
+}
+
+.hero h1{
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:10px;
+}
+
+.container{
+padding:30px;
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:var(--card);
+padding:20px;
+border-radius:10px;
+margin-bottom:25px;
+}
+
+.button{
+background:var(--accent);
+border:none;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+border:none;
+}
+
+.comment{
+background:#000;
+padding:10px;
+border-radius:6px;
+margin-top:10px;
+}
+
+.movies{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.movie{
+background:var(--card);
+padding:15px;
+border-radius:8px;
+text-align:center;
+}
+
+footer{
+text-align:center;
+padding:25px;
+background:#000;
+}
+
+.boykotMesaj{
+margin-top:20px;
+font-weight:bold;
+color:#ff4444;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+<span>⏰ <span id="clock"></span></span>
+
+<span>👥 Ziyaretçi: <span id="visitorCount"></span></span>
+
+<button onclick="toggleMode()">Mod</button>
+
+</div>
+
+<section class="hero">
+
+<h1>Sinanxlord Fitness Blog</h1>
+
+</section>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Motivasyon</h2>
+
+<p>"Disiplin güçlü bir vücut ve güçlü bir karakterin temelidir."</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Cristiano Ronaldo Motivasyonu</h2>
+
+<div id="blogList"></div>
+
+<div style="line-height:1.8;font-size:17px;max-width:800px;margin:auto;">
+
+<p>
+Cristiano Ronaldo sadece dünyanın en iyi futbolcularından biri değildir.
+O aynı zamanda disiplinin, çalışmanın ve kararlılığın canlı bir örneğidir.
+Portekiz'in küçük bir adasında doğan Ronaldo'nun hayatı hiçbir zaman
+kolay olmadı. Küçük yaşlardan itibaren hayallerinin peşinden koştu.
+</p>
+
+<p>
+Genç yaşta ailesinden ayrılıp Lizbon'a gitmek zorunda kaldı.
+Birçok insan onun başarabileceğine inanmadı.
+Ama Ronaldo hiçbir zaman pes etmedi.
+Her gün diğer oyunculardan daha fazla çalıştı.
+</p>
+
+<p>
+Antrenman bittikten sonra bile sahada kalıp ekstra çalışmalar yaptı.
+Koşular, kuvvet çalışmaları ve teknik antrenmanlar onun günlük
+rutinlerinin bir parçası haline geldi.
+</p>
+
+<p>
+Ronaldo'nun başarısının arkasında sadece yetenek yoktur.
+Onu zirveye taşıyan şey disiplinidir.
+Beslenmesine dikkat etmesi, düzenli uyuması ve sürekli kendini
+geliştirmesi onu diğer sporculardan ayıran en önemli özelliklerdir.
+</p>
+
+<p>
+Birçok sporcu yeteneklidir fakat herkes Ronaldo kadar çalışmaz.
+O her zaman şunu göstermiştir:
+<b>Başarı tesadüf değildir.</b>
+Başarı; emek, sabır ve kararlılıkla gelir.
+</p>
+
+<p>
+Genç sporcular için Ronaldo'nun hikayesi büyük bir motivasyon
+kaynağıdır. Çünkü o bize şunu öğretir:
+</p>
+
+<p style="font-size:20px;font-weight:bold;text-align:center;">
+"Hayallerin için çalışırsan, disiplinli olursan
+ve asla pes etmezsen bir gün zirveye çıkabilirsin."
+</p>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<h2>Antrenman Planı</h2>
+
+<button class="button" onclick="showPlan()">Planı Aç</button>
+
+<div id="plan" style="display:none">
+
+<div id="planText">
+
+<h3>1.Gün – Sırt & Biceps</h3>
+<ul>
+<li>Lat Pulldown – 5x8</li>
+<li>Seated Row – 4x10</li>
+<li>Biceps Curl – 4x12</li>
+</ul>
+
+<h3>2.Gün – Göğüs & Triceps</h3>
+<ul>
+<li>Bench Press – 5x8</li>
+<li>Cable Crossover – 4x12</li>
+<li>Triceps Pushdown – 4x12</li>
+</ul>
+
+<h3>3.Gün – Omuz</h3>
+<ul>
+<li>Shoulder Press – 5x8</li>
+<li>Lateral Raise – 4x12</li>
+<li>Face Pull – 3x15</li>
+</ul>
+
+</div>
+
+<button class="button" onclick="copyPlan()">Planı Kopyala</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Filmler</h2>
+
+<div class="movies">
+
+<div class="movie">Rocky</div>
+<div class="movie">Rambo</div>
+<div class="movie">Expendables</div>
+<div class="movie">Bloodsport</div>
+<div class="movie">Kickboxer</div>
+<div class="movie">Universal Soldier</div>
+<div class="movie">Undisputed 2</div>
+<div class="movie">Undisputed 3</div>
+<div class="movie">Ninja Shadow of a Tear</div>
+<div class="movie">Avengement</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Oyunlar</h2>
+
+<p>🎮 FC Mobile ID: 982309458837102594</p>
+<p>🎮 PUBG Mobile ID: 51392805274</p>
+<p>🎮 Call Of Duty Mobile</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Boykot Botu</h2>
+
+<input id="urunAra" placeholder="Ürün veya marka yaz">
+
+<button class="button" onclick="boykotKontrol()">
+Kontrol Et
+</button>
+
+<p id="boykotSonuc"></p>
+
+<div class="boykotMesaj">
+Bebek katillerine geçit yok.
+Zulme karşı sessiz kalmak da zulümdür.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>BMI Hesaplama</h2>
+
+<input id="kilo" placeholder="Kilo">
+
+<input id="boy" placeholder="Boy (cm)">
+
+<button class="button" onclick="bmi()">Hesapla</button>
+
+<p id="bmiSonuc"></p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Yorumlar</h2>
+
+<input id="isim" placeholder="Ad">
+
+<textarea id="yorum"></textarea>
+
+<button class="button" onclick="yorumEkle()">Gönder</button>
+
+<div id="yorumList"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Admin Panel</h2>
+
+<input id="adminUser" placeholder="Kullanıcı Adı">
+
+<input id="adminPass" type="password" placeholder="Şifre">
+
+<button class="button" onclick="adminLogin()">Giriş Yap</button>
+
+<div id="adminArea" style="display:none">
+
+<h3>Blog Ekle</h3>
+
+<textarea id="blogText"></textarea>
+
+<button class="button" onclick="blogEkle()">Blog Ekle</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+<footer>
+
+© 2026 Sinanxlord Fitness Blog
+
+</footer>
+
+
+
+<script>
+
+setInterval(()=>{
+document.getElementById("clock").innerText=
+new Date().toLocaleTimeString("tr-TR")
+},1000)
+
+let count=localStorage.getItem("visit")
+
+if(!count){count=1}else{count=parseInt(count)+1}
+
+localStorage.setItem("visit",count)
+
+document.getElementById("visitorCount").innerText=count
+
+
+function toggleMode(){
+document.body.classList.toggle("light")
+}
+
+
+function showPlan(){
+let p=document.getElementById("plan")
+p.style.display=p.style.display=="block"?"none":"block"
+}
+
+
+function copyPlan(){
+let text=document.getElementById("planText").innerText
+navigator.clipboard.writeText(text)
+alert("Antrenman planı kopyalandı 💪")
+}
+
+
+function bmi(){
+
+let kilo=document.getElementById("kilo").value
+let boy=document.getElementById("boy").value/100
+
+let sonuc=kilo/(boy*boy)
+
+document.getElementById("bmiSonuc").innerText="BMI: "+sonuc.toFixed(2)
+
+}
+
+
+/* YORUM */
+
+function yorumEkle(){
+
+let isim=document.getElementById("isim").value
+let yorum=document.getElementById("yorum").value
+let id=Math.random()
+
+document.getElementById("yorumList").innerHTML+=
+`<div class="comment" id="y${id}">
+<b>${isim}</b><br>${yorum}
+<br>
+<button onclick="yorumSil('y${id}')">Sil</button>
+</div>`
+
+}
+
+function yorumSil(id){
+
+if(!admin){
+alert("Sadece admin silebilir")
+return
+}
+
+document.getElementById(id).remove()
+
+}
+
+
+/* ADMIN */
+
+let admin=false
+
+function adminLogin(){
+
+let user=document.getElementById("adminUser").value
+let pass=document.getElementById("adminPass").value
+
+if(user=="sinanxlord" && pass=="1234"){
+
+admin=true
+document.getElementById("adminArea").style.display="block"
+alert("Admin giriş başarılı")
+
+}else{
+
+alert("Yanlış bilgiler")
+
+}
+
+}
+
+
+function blogEkle(){
+
+if(!admin){
+alert("Admin değilsin")
+return
+}
+
+let text=document.getElementById("blogText").value
+
+document.getElementById("blogList").innerHTML+=
+`<div class="comment">${text}</div>`
+
+}
+
+
+/* BOYKOT BOT */
+
+let boykotListe=[
+"coca cola",
+"starbucks",
+"mcdonalds",
+"burger king",
+"pepsi",
+"nestle",
+"kfc"
+]
+
+function boykotKontrol(){
+
+let urun=document
+.getElementById("urunAra")
+.value
+.toLowerCase()
+
+let sonuc=document.getElementById("boykotSonuc")
+
+if(boykotListe.includes(urun)){
+
+sonuc.innerHTML="❌ Bu marka boykot listesinde"
+
+}else{
+
+sonuc.innerHTML="✅ Boykot listesinde görünmüyor"
+
+}
+
+}
+
+</script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCEy7E-8ZIBvsUHOvAri66j3nueiw-juYU",
+  authDomain: "sinanxlord00.firebaseapp.com",
+  projectId: "sinanxlord00",
+  storageBucket: "sinanxlord00.firebasestorage.app",
+  messagingSenderId: "361997173495",
+  appId: "1:361997173495:web:de78271d866286b69649f2",
+  measurementId: "G-ZE409J7TKH"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+
+
+// YORUM EKLE
+window.yorumEkle = async function(){
+
+let isim=document.getElementById("isim").value
+let yorum=document.getElementById("yorum").value
+
+await addDoc(collection(db,"yorumlar"),{
+isim:isim,
+yorum:yorum
+})
+
+yorumlariYukle()
+
+}
+
+
+// YORUMLARI GETİR
+async function yorumlariYukle(){
+
+let alan=document.getElementById("yorumList")
+alan.innerHTML=""
+
+const querySnapshot = await getDocs(collection(db,"yorumlar"))
+
+querySnapshot.forEach((doc)=>{
+
+let data=doc.data()
+
+alan.innerHTML+=`
+<div class="comment">
+<b>${data.isim}</b><br>
+${data.yorum}
+</div>
+`
+
+})
+
+}
+
+yorumlariYukle()
+
+
+
+// BLOG EKLE
+window.blogEkle = async function(){
+
+if(!admin){
+alert("Admin değilsin")
+return
+}
+
+let text=document.getElementById("blogText").value
+
+await addDoc(collection(db,"bloglar"),{
+text:text
+})
+
+bloglariYukle()
+
+}
+
+
+// BLOGLARI GETİR
+async function bloglariYukle(){
+
+let alan=document.getElementById("blogList")
+alan.innerHTML=""
+
+const querySnapshot = await getDocs(collection(db,"bloglar"))
+
+querySnapshot.forEach((doc)=>{
+
+let data=doc.data()
+
+alan.innerHTML+=`
+<div class="card">
+${data.text}
+</div>
+`
+
+})
+
+}
+
+bloglariYukle()
+
+</script>
+
+
+</body>
+</html>
